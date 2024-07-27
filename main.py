@@ -9,53 +9,75 @@ from pymediainfo import MediaInfo
 from PyPDF2 import PdfReader, PdfWriter
 
 def extract_image_metadata(image_path):
+    '''
+    Extract metadata from an image file.
+    '''
     try:
         with Image.open(image_path) as img:
             metadata = img.info
         return metadata
     except Exception as e:
-        print(f"Failed to extract image metadata: {e}")
+        print(f'Failed to extract image metadata: {e}')
         return {}
 
 def extract_audio_metadata(audio_path):
+    '''
+    Extract metadata from an audio file.
+    '''
     try:
         audio = MutagenFile(audio_path)
         metadata = {k: str(v) for k, v in audio.tags.items()} if audio.tags else {}
         return metadata
     except Exception as e:
-        print(f"Failed to extract audio metadata: {e}")
+        print(f'Failed to extract audio metadata: {e}')
         return {}
 
 def extract_video_metadata(video_path):
+    '''
+    Extract metadata from a video file.
+    '''
     try:
         media_info = MediaInfo.parse(video_path)
         metadata = media_info.to_data()
         return metadata
     except Exception as e:
-        print(f"Failed to extract video metadata: {e}")
+        print(f'Failed to extract video metadata: {e}')
         return {}
 
 def extract_pdf_metadata(pdf_path):
+    '''
+    Extract metadata from a PDF file.
+    '''
     try:
         reader = PdfReader(pdf_path)
         metadata = reader.metadata
         return metadata
     except Exception as e:
-        print(f"Failed to extract PDF metadata: {e}")
+        print(f'Failed to extract PDF metadata: {e}')
         return {}
 
 def save_metadata_to_file(metadata, metadata_file_path):
+    '''
+    Save metadata to a file.
+    '''
     try:
         with open(metadata_file_path, 'w') as f:
             json.dump(metadata, f, indent=4)
     except Exception as e:
         try:
             # Encode the bytes objects
+            # metadata['comment'] = base64.b64encode(metadata['comment']).decode('utf-8')
+            # metadata['icc_profile'] = base64.b64encode(metadata['icc_profile']).decode('utf-8')
+
             metadata = encode_bytes_in_dict(metadata)
+            json.dump(metadata, f, indent=4)
         except:
-            print(f"Failed to save metadata to file: {e}")
+            print(f'Failed to save metadata to file: {e}')
 
 def encode_bytes_in_dict(obj):
+    '''
+    Encode bytes objects in a dictionary to base64 strings.
+    '''
     if isinstance(obj, dict):
         return {k: encode_bytes_in_dict(v) for k, v in obj.items()}
     elif isinstance(obj, list):
@@ -66,6 +88,9 @@ def encode_bytes_in_dict(obj):
         return obj
 
 def remove_image_metadata(image_path, output_image_path):
+    '''
+    Remove metadata from an image file.
+    '''
     try:
         with Image.open(image_path) as img:
             img_data = list(img.getdata())
@@ -73,23 +98,31 @@ def remove_image_metadata(image_path, output_image_path):
             img_without_metadata.putdata(img_data)
             img_without_metadata.save(output_image_path)
     except Exception as e:
-        print(f"Failed to remove image metadata: {e}")
+        print(f'Failed to remove image metadata: {e}')
 
 def remove_audio_metadata(audio_path):
+    '''
+    Remove metadata from an audio file.
+    '''
     try:
         audio = MutagenFile(audio_path)
         audio.delete()
-        #audio.save(output_audio_path)
     except Exception as e:
-        print(f"Failed to remove audio metadata: {e}")
+        print(f'Failed to remove audio metadata: {e}')
 
 def remove_video_metadata(video_path, output_video_path):
+    '''
+    Remove metadata from a video file.
+    '''
     try:
         shutil.copy(video_path, output_video_path)  # Placeholder for video metadata removal
     except Exception as e:
-        print(f"Failed to remove video metadata: {e}")
+        print(f'Failed to remove video metadata: {e}')
 
 def remove_pdf_metadata(pdf_path, output_pdf_path):
+    '''
+    Remove metadata from a PDF file.
+    '''
     try:
         reader = PdfReader(pdf_path)
         writer = PdfWriter()
@@ -100,25 +133,22 @@ def remove_pdf_metadata(pdf_path, output_pdf_path):
         with open(output_pdf_path, 'wb') as f:
             writer.write(f)
     except Exception as e:
-        print(f"Failed to remove PDF metadata: {e}")
+        print(f'Failed to remove PDF metadata: {e}')
+
 
 def copy_file(src_path, dst_path):
-    """
+    '''
     Copies a file from src_path to dst_path.
-
-    Parameters:
-    src_path (str): The path of the source file.
-    dst_path (str): The path of the destination file.
-    """
+    '''
     try:
         shutil.copy(src_path, dst_path)
-        # print(f"File copied from {src_path} to {dst_path}")
+        # print(f'File copied from {src_path} to {dst_path}')
     except FileNotFoundError:
-        print(f"File not found: {src_path}")
+        print(f'File not found: {src_path}')
     except PermissionError:
-        print(f"Permission denied: {dst_path}")
+        print(f'Permission denied: {dst_path}')
     except Exception as e:
-        print(f"Error occurred while copying file: {e}")
+        print(f'Error occurred while copying file: {e}')
 
 def results_configurator(file_name):
     '''
@@ -133,30 +163,30 @@ def results_configurator(file_name):
     return folder_name
     
 def list_files_in_current_folder():
-    """
+    '''
     Lists all files in the current directory.
-
-    Returns:
-    list: A list of filenames in the current directory.
-    """
+    '''
     try:
         files = [f for f in os.listdir('.') if os.path.isfile(f)]
         return files
     except Exception as e:
-        print(f"Error occurred while listing files: {e}")
+        print(f'Error occurred while listing files: {e}')
         return []
 
 def process_file(file_path, folder_name):
+    '''
+    Analyze the file and remove any metadata.
+    '''
     if not os.path.exists(file_path):
-        print(f"File not found: {file_path}")
+        print(f'File not found: {file_path}')
         return
 
     file_extension = os.path.splitext(file_path)[1].lower()
     base_name = os.path.basename(file_path)
     file_name, file_extension = os.path.splitext(base_name)
     new_file_path = folder_name + '/' + file_path
-    metadata_file_path = f"{new_file_path}_metadata.json"
-    output_file_path = f"{new_file_path}_no_metadata{file_extension}"
+    metadata_file_path = f'{new_file_path}_metadata.json'
+    output_file_path = f'{new_file_path}_no_metadata{file_extension}'
     
     try:
         if file_extension in ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff']:
@@ -177,13 +207,13 @@ def process_file(file_path, folder_name):
             save_metadata_to_file(metadata, metadata_file_path)
             remove_pdf_metadata(file_path, output_file_path)
         else:
-            print(f"Unsupported file type: {file_extension}")
+            print(f'Unsupported file type: {file_extension}')
             return
         
-        print(f"Metadata saved to: {metadata_file_path}")
-        print(f"File without metadata saved to: {output_file_path}\n")
+        print(f'Metadata saved to: {metadata_file_path}')
+        print(f'File without metadata saved to: {output_file_path}\n')
     except Exception as e:
-        print(f"An error occurred while processing the file: {e}")
+        print(f'An error occurred while processing the file: {e}')
 
 def main():
     files = list_files_in_current_folder()
@@ -195,7 +225,7 @@ def main():
         try:
             process_file(file, folder_name)
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f'An error occurred: {e}')
 
 if __name__ == '__main__':
     main()

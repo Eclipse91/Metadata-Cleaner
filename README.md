@@ -14,7 +14,7 @@ Metadata Cleaner is a Python program designed to remove metadata from files. It 
 - `mutagen` library for handling audio metadata.
 - `pymediainfo` and the `MediaInfo` library for extracting video metadata (if needed).
 
-### Installing MediaInfo Library
+## Installing MediaInfo Library
 
 #### Ubuntu/Debian
 
