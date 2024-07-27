@@ -1,0 +1,59 @@
+# Ignore all directories named __pycache__ in any location within the repository.
+**/__pycache__
+
+# Ignore Python bytecode files directly under the repository's root directory.
+__pycache__/
+
+# Ignore the .venv folder
+.venv
+
+# Ignore the .vscode folder
+.vscode
+
+# Ignore the these folder
+temp
+results
+
+# Ignore these format of files
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mpeg
+*.mpg
+*.3gp
+*.mp3
+*.wav
+*.aac
+*.flac
+*.ogg
+*.wma
+*.m4a
+*.alac
+*.aiff
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.svg
+*.webp
+*.heic
+*.raw
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.odt
+*.rtf
+*.html
+*.epub
+*.mobi
+

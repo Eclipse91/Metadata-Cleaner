@@ -1,0 +1,4 @@
+mutagen==1.47.0
+pillow==10.4.0
+pymediainfo==6.1.0
+PyPDF2==3.0.1
