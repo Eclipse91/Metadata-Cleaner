@@ -1,4 +1,16 @@
+EbookLib==0.18
+et-xmlfile==1.1.0
+loguru==0.6.0
+lxml==5.2.2
+mobi==0.3.3
 mutagen==1.47.0
+openpyxl==3.1.5
 pillow==10.4.0
 pymediainfo==6.1.0
+pypandoc==1.13
 PyPDF2==3.0.1
+python-docx==1.1.2
+python-pptx==0.6.23
+six==1.16.0
+typing_extensions==4.12.2
+XlsxWriter==3.2.0
