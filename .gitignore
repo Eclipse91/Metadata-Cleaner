@@ -13,6 +13,10 @@ __pycache__/
 # Ignore the these folder
 temp
 results
+Videos
+Documents
+Audios
+Images
 
 # Ignore these format of files
 ### Video Formats
@@ -24,12 +28,12 @@ results
 *.AVI
 *.mov
 *.MOV
+*.webm
+*.WEBM
 *.wmv
 *.WMV
 *.flv
 *.FLV
-*.webm
-*.WEBM
 *.mpeg
 *.MPEG
 *.mpg
@@ -42,12 +46,12 @@ results
 *.MP3
 *.wav
 *.WAV
+*.ogg
+*.OGG
 *.aac
 *.AAC
 *.flac
 *.FLAC
-*.ogg
-*.OGG
 *.wma
 *.WMA
 *.m4a
@@ -68,12 +72,12 @@ results
 *.GIF
 *.bmp
 *.BMP
-*.tiff
-*.TIFF
 *.svg
 *.SVG
 *.webp
 *.WEBP
+*.tiff
+*.TIFF
 *.heic
 *.HEIC
 *.raw

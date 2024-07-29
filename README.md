@@ -65,7 +65,7 @@ brew install media-info
 
 Download and install MediaInfo from the official [MediaInfo website](https://mediaarea.net/en/MediaInfo/Download/Windows).
 
-## Installing `ffmpeg` for Video Metadata Extraction
+## Installing ffmpeg for Video Metadata Extraction
 
 ##### Ubuntu/Debian
 ```sh
