@@ -32,13 +32,15 @@ Metadata Cleaner is a Python program designed to remove metadata from files. It 
    pip install -r requirements.txt
    ```
 
-4. **Add a file**: Add as many files as you want in the clean folder.
+4. **Create a folder for the files**: Create a folder named `clean`.
 
-5. **Run the application**:
+5. **Add a file**: Add as many files as you want in the clean folder.
+
+6. **Run the application**:
    ```bash
    python3 main.py
    ```
-6. **Check the files**: The files are in the results folder
+7. **Check the files**: The files are in the results folder
 
 ## Installing MediaInfo for Video Metadata Extraction
 
