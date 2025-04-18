@@ -19,7 +19,7 @@ Metadata Cleaner is a Python program designed to remove metadata from files. It 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/Metadata-Cleaner.git
+    git clone https://github.com/Eclipse91/Metadata-Cleaner.git
    ```
 
 2. **Navigate to the project directory**:
